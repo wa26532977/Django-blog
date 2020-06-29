@@ -23,7 +23,7 @@ class Post(models.Model):
 
     # go to the post_detail url after user create the post
     def get_absolute_url(self):
-        return reverse("post_detail", kwargs={"pk": self.pk})
+        return reverse("blog:post_detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return f"{self.title}, {self.author},"
@@ -42,7 +42,7 @@ class Comment(models.Model):
 
     # go the main post page after comment post
     def get_absolute_url(self):
-        return reverse("post_list")
+        return reverse("blog:post_list")
 
     def __str__(self):
         return f"{self.text}, {self.author}"

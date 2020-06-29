@@ -1,10 +1,99 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    {#    bootstrap#}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {#    medium style editor#}
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css"
+          type="text/css" media="screen">
+    {#    custom css#}
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    {#    <fonts>#}
+    <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
 </head>
 <body>
+{#navbar#}
+<nav class="navbar navbar-expand-lg navbar-light bg-light techfont">
+    <a class="navbar-brand bigbrand" href="{% url "blog:post_list" %}">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url "blog:about" %}">about</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="https://github.com/">Github</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://www.linkedin.com/">LinkedIn</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav mr-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blog:post_new' %}">New Post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blog:post_draft_list' %}">Drafts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=""> Welcome: {{ user.username }}</a>
+                </li>
+                {#                link this to user account#}
+                <li>
+                    <a class="nav-item" href="{% url 'login' %}"><img class='resize' src="{% static "image/Login_icon.png" %}" alt=""></a>
+                </li>
+            {% else %}
+                <li>
+                    <a class="nav-item" href="{% url 'login' %}"><img class='resize' src="{% static "image/Login_icon.png" %}" alt=""></a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+
+<div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+            {% block body_block %}
+
+            {% endblock %}
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
