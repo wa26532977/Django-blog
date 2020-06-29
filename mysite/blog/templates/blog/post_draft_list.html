@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'blog/base.html' %}
+{% block body_block %}
+    <h1 class="posttitle loader">{{ post.title }}</h1>
+    {% if post.published_date %}
+        <div class="date postcontent">
+            {{ post.public_date }}
+        </div>
+    {% else %}
+        <a href="{% url "blog:post_publish" %}">Publish</a>
+    {% endif %}
+    <div class="post_detail"></div>
+{% endblock %}
