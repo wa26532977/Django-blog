@@ -11,7 +11,7 @@ class PostForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'textinputclass'}),
             # class connect to css and bootstrap4
-            'text': forms.Textarea(attrs={'class': "editable medium-editor-textarea postcontent"}),
+            'text': forms.Textarea(attrs={'class': "editable form-control medium-editor-textarea postcontent", 'id': "exampleFormControlTextarea1", "rows": "5"}),
         }
 
 
