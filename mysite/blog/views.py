@@ -9,6 +9,10 @@ from django.urls import reverse_lazy
 # Create your views here.
 
 
+class LogoutView(TemplateView):
+    template_name = "logout.html"
+
+
 class AboutView(TemplateView):
     template_name = "about.html"
 
@@ -45,9 +49,9 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 
 class DraftListView(LoginRequiredMixin, ListView):
     login_url = "/login/"
-    template_name = 'blog/post_draft_list.html'
-    context_object_name = "posts"
-    # redirect_field_name = 'blog/post_draft_list.html'
+    template_name = "blog/post_draft_list.html"
+    context_object_name = 'posts'
+    redirect_field_name = 'blog/post_draft_list.html'
     model = Post
 
     def get_queryset(self):
@@ -63,7 +67,7 @@ def post_public(request, pk):
 # from now on is comments
 
 
-@login_required
+@login_required(login_url="/accounts/login/")
 def add_comment_to_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
 

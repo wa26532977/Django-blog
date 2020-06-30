@@ -72,7 +72,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
-
+LOGOUT_REDIRECT_URL = 'good/'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
