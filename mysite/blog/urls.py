@@ -1,8 +1,10 @@
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from . import views
 app_name = "blog"
 urlpatterns = [
     path('', views.PostListView.as_view(), name="post_list"),
+    path('accounts/login/', auth_views.LoginView.as_view()),
     path('about/', views.AboutView.as_view(), name="about"),
     path('post/<pk>', views.PostDetailView.as_view(), name="post_detail"),
     path('post/new/', views.CreatePostView.as_view(), name="post_new"),
